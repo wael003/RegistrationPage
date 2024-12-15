@@ -26,7 +26,16 @@ app.post("/User", (req, res) => {
 
 
 });
-
+app.post("/User/:Email", (req, res) => {
+    const body = req.body;
+    
+    db.checkPass(body).then((data) => {
+        res.send(data);
+    })
+        .catch(err => {
+            res.status(500).send(err);
+        })
+});
 app.get("/User/:Email", (req, res) => {
     const Email  = req.params.Email;
 
